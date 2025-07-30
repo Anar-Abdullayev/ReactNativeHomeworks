@@ -1,7 +1,9 @@
 import { readAllData } from "@/lib/DbFromFileService";
 import { Movie } from "@/models/Movie";
+import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
+import BackgroundMovieTitle from "./BackgroundMovieTitle";
 import MovieCard from "./MovieCard";
 
 export default function Movies() {
@@ -12,9 +14,14 @@ export default function Movies() {
             setMovies(data);
         })();
     }, [])
+    const navigation = useNavigation<any>();
+    const handleGoDetails = (id: number) => {
+        const movie = movies.find(m => m.id === id);
+        navigation.navigate('details', { movie: movie })
+    }
     return (
         <View style={{ flex: 1 }}>
-            <View style={styles.backgroundTextContainer}><Text style={styles.backgroundTitle}>upcoming</Text></View>
+            <BackgroundMovieTitle title="upcoming"/>
             <Text style={styles.title}>Movie</Text>
             <View style={{ marginTop: 15 }}>
                 <FlatList
@@ -22,7 +29,7 @@ export default function Movies() {
                     style={{ paddingLeft: 35 }}
                     data={movies}
                     keyExtractor={(item) => item.id.toString()}
-                    renderItem={({ item }) => <MovieCard movie={item} />}
+                    renderItem={({ item }) => <MovieCard onClick={handleGoDetails} movie={item} />}
                     showsHorizontalScrollIndicator={false}
                 />
             </View>

@@ -3,7 +3,7 @@ import Trending from "@/components/Trending";
 import { Platform, SafeAreaView, StatusBar, StyleSheet, View } from "react-native";
 
 export default function HomeScreen({ navigation }: any) {
-
+    console.log(navigation)
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: 'black' }}>
             <View style={[styles.container]}>

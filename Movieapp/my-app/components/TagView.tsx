@@ -17,6 +17,6 @@ const styles = StyleSheet.create({
     },
     tagText: {
         color: 'orange',
-        fontSize: 11
+        fontSize: 12
     }
 })

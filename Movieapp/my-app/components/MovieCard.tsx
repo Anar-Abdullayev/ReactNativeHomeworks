@@ -1,16 +1,19 @@
 import { Movie } from "@/models/Movie";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import TagView from "./TagView";
 
 interface Props {
-    movie: Movie
+    movie: Movie,
+    onClick: (id: number) => void
 }
 
-export default function MovieCard({ movie }: Props) {
-
+export default function MovieCard({ movie, onClick }: Props) {
+    
     return (
         <View style={styles.container}>
-            <Image source={{ uri: movie.imageUrl }} style={styles.image} />
+            <TouchableOpacity onPress={() => onClick(movie.id)}>
+                <Image source={{ uri: movie.imageUrl }} style={styles.image} />
+            </TouchableOpacity>
             <View style={styles.infoContainer}>
                 <View style={{flex:1}}><Text style={styles.color}>{movie.name}</Text></View>
                 <TagView title={movie.tags[0]} />
